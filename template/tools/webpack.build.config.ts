@@ -27,6 +27,7 @@ export default [
       }
     },
     externals: {
+      // uncomment following lines if you want use external library
       // vue: {
       //   root: 'Vue', commonjs: 'vue', commonjs2: 'vue', amd: 'vue'
       // },
@@ -102,7 +103,7 @@ export default [
       // you can customize output by editing /index.html
       // see https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
-        title: 'TC',
+        title: '{{ name }}',
         filename: 'index.html',
         template: 'index.html',
         inject: true,
