@@ -32,3 +32,6 @@ npm run test
 # run tests and generate coverage report
 npm run cov
 
+## Known Issue
+
+> The latest version of `css-loader` will introduce Buffer into browser which is not necessnary. So I forked a `custom-css-loader` to reduce the production dist size by ~40kb (min+gzipped)
