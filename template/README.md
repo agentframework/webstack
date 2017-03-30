@@ -27,10 +27,10 @@ npm run build
 npm run build --report
 
 # auto-run unit tests after save
-npm run test
+npm start
 
 # run tests and generate coverage report
-npm run cov
+npm run test
 
 ## Known Issue
 
