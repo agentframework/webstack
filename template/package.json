@@ -45,7 +45,7 @@
     "babel-core": "latest",
     "babel-loader": "latest",
     "babel-preset-babili": "latest",
-    "custom-css-loader": "latest",
+    "css-loader": "git://github.com/e2tox/css-loader.git",
     "extract-text-webpack-plugin": "latest",
     "file-loader": "latest",
     "html-webpack-plugin": "latest",

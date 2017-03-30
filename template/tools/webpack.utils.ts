@@ -27,7 +27,7 @@ export function configCssLoaders(options) {
   options = options || {};
   
   const cssLoader = {
-    loader: 'custom-css-loader',
+    loader: 'css-loader',
     options: {
       minimize: options.minimize || false,
       sourceMap: options.sourceMap || false
