@@ -3,7 +3,7 @@
   <section>
     <h1>About</h1>
     <p>
-      <b>version: <span v-bind="version"></span></b>
+      <b>version: <span v-html="version"></span></b>
     </p>
   </section>
 
