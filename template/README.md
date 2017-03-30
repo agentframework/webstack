@@ -31,6 +31,7 @@ npm start
 
 # run tests and generate coverage report
 npm run test
+```
 
 ## Known Issue
 
