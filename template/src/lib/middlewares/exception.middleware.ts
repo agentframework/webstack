@@ -2,7 +2,6 @@ import { Request, Response, Next } from '../router';
 import { router } from '../core/ExpressDecorators';
 import { ServerRouter } from '../router';
 import { ExpressRouter } from '../core/ExpressRouter';
-const http = require('http');
 
 @router('/api')
 export class GlobalExceptionMiddleware extends ServerRouter {
