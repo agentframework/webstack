@@ -1,6 +1,5 @@
 import { MongoDocument, ObjectId } from './MongoTypes';
 import * as mongodb from 'mongodb-core';
-import { generate } from 'shortid';
 
 const metakey = Symbol.for('mongo.metakey');
 const metadata = new WeakMap<any, any>();
@@ -86,7 +85,4 @@ export function MarkTotalCount(target: any, total: number): any {
 
 export function GetTotalCount(target: any): number {
   return GetMetadata(target, 'total', 0);
-}
-export function shortid(): string {
-  return generate();
 }
