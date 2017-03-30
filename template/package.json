@@ -21,9 +21,7 @@
     "build": "npm run build:clean && npm run build:tsc && npm run build:webpack || exit 0",
     "build:clean": "rm -rf ./bin/* && rm -rf ./public/*",
     "build:tsc": "node_modules/.bin/tsc -p tsconfig.json --noEmit",
-    "build:webpack": "node_modules/.bin/webpack --display-error-details --config tools/webpack.build.config.ts",
-    "test-on-travis": "npm run lint && npm run test:coverage",
-    "test-on-teamcity": "exit 1"
+    "build:webpack": "node_modules/.bin/webpack --display-error-details --config tools/webpack.build.config.ts"
   },
   "dependencies": {
     "agentframework": "~0",

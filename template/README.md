@@ -30,7 +30,11 @@ npm run build --report
 npm start
 
 # run tests and generate coverage report
+npm run cov
+
+# test for everything: specs, lint, build and coverage
 npm run test
+
 ```
 
 ## Known Issue
