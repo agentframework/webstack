@@ -1,0 +1,16 @@
+{
+  "exec": "npm run test:unit",
+  "ext": "spec.ts test.ts json yaml proto",
+  "env": {
+    "NODE_ENV": "test"
+  },
+  "events": {
+    "restart": "echo 'FILE: '$FILENAME' was changed'"
+  },
+  "watch": [
+    "conf",
+    "src",
+    "test",
+    "tools"
+  ]
+}

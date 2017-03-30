@@ -1,0 +1,9 @@
+{
+  "name": "vue-cli-template-webstack",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "TypeScript, AgentFramework, Express, Mongodb, Webpack, Lint, Code Coverage",
+  "devDependencies": {
+    "vue-cli": "^2.8.1"
+  }
+}

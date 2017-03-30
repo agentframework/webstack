@@ -1,0 +1,4 @@
+PORT: 80
+
+MONGODB:
+  - { name: production, host: mongo, port: 27017 }

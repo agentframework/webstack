@@ -1,0 +1,19 @@
+{
+  "exec": "npm run standalone",
+  "ext": "ts json yaml",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "events": {
+    "restart": "echo 'FILE: '$FILENAME' was changed'"
+  },
+  "watch": [
+    "conf",
+    "src/bin",
+    "src/conf",
+    "src/lib",
+    "src/shared",
+    "test",
+    "tools"
+  ]
+}

@@ -1,0 +1,8 @@
+PORT: 8081
+
+LOG_CONSOLE: false
+LOG_ROTATE: false
+PRINT_SETTINGS: false
+
+MONGODB:
+  - { name: test, host: localhost, port: 27017 }
