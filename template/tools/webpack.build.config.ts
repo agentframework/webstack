@@ -20,7 +20,12 @@ export default [
     resolve: {
       extensions: ['.ts', '.vue', '.js'],
       alias: {
+{{#if_eq build "runtime"}}
         'vue$': 'vue/dist/vue.runtime.min.js',
+{{/if_eq}}
+{{#if_eq build "standalone"}}
+        'vue$': 'vue/dist/vue.min.js',
+{{/if_eq}}
         'vuex$': 'vuex/dist/vuex.min.js',
         'vue-router$': 'vue-router/dist/vue-router.min.js',
         'axios$': 'axios/dist/axios.min.js'
