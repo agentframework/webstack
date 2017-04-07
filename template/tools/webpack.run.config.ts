@@ -18,13 +18,13 @@ export default [
       extensions: ['.ts', '.vue', '.js'],
       alias: {
 {{#if_eq build "runtime"}}
-        'vue$': 'vue/dist/vue.runtime.esm.js',
+        'vue$': 'vue/dist/vue.runtime.js',
 {{/if_eq}}
 {{#if_eq build "standalone"}}
-        'vue$': 'vue/dist/vue.esm.js',
+        'vue$': 'vue/dist/vue.js',
 {{/if_eq}}
-        'vuex$': 'vuex/dist/vuex.esm.js',
-        'vue-router$': 'vue-router/dist/vue-router.esm.js',
+        'vuex$': 'vuex/dist/vuex.js',
+        'vue-router$': 'vue-router/dist/vue-router.js',
         'axios$': 'axios/dist/axios.js'
       }
     },
