@@ -1,51 +1,22 @@
-import { Agent } from 'agentframework';
-import { inspect } from 'util';
 import * as express from 'express';
-import * as compression from 'compression'
-
-import { forEach } from './utils/index';
 import { IServerSettings } from '../conf/settings';
-import { installExpressExtensions } from './core.extensions/index';
-
-
-import * as Routers from './routers';
-import { ExpressEngine } from './core/ExpressEngine';
+import { ExpressEngine } from 'agentstack-express';
+import { GlobalExceptionMiddleware } from './middlewares/exception.middleware';
+import { GlobalMiddleware } from './middlewares/global.middleware';
+import { RootRouter } from './routers/root.router';
 
 
 export class Server extends ExpressEngine<IServerSettings> {
+  
+  onInit() {
+    this.addRouter(GlobalMiddleware);
+    this.addRouter(RootRouter);
+    this.addRouter(GlobalExceptionMiddleware);
+  }
+  
 }
 
 const server = new Server();
-
-//////////////////////////////////////////////////////////////////////////////////////
-// Exception Handler
-process.on('unhandledPromiseRejection', (promise, rejection) => {
-  server.logger.error({ rejection: inspect(rejection), promise: inspect(promise) }, 'unhandledPromiseRejection');
-});
-
-process.on('unhandledRejection', (error, promise) => {
-  server.logger.error({ error: inspect(error), promise: inspect(promise) }, 'unhandledRejection');
-});
-
-//////////////////////////////////////////////////////////////////////////////////////
-// Extensions
-installExpressExtensions<IServerSettings>(server);
-
-//////////////////////////////////////////////////////////////////////////////////////
-// Router Agents
-forEach<Agent>(Routers, router => server.addRouter(router));
-
-
-server.application.use(compression({filter: shouldCompress}));
-
-function shouldCompress (req, res) {
-  if (req.headers['x-no-compression']) {
-    // don't compress responses with this request header
-    return false
-  }
-  // fallback to standard filter function
-  return compression.filter(req, res)
-}
 
 //////////////////////////////////////////////////////////////////////////////////////
 // Static pages

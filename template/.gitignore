@@ -7,10 +7,7 @@
 /public/assets/
 /public/index.html
 
-*.log
-*.js
-*.js.map
-*.d.ts
+
 
 # prevent user commit any sensitive information
 **/*.pem

@@ -1,9 +1,7 @@
-import { MongoServer } from '../lib/data';
-import { IExpressEngineSettings } from '../lib/core/ExpressEngine';
+import { IExpressEngineSettings } from 'agentstack-express';
 
 export interface IServerSettings extends IExpressEngineSettings {
-  
-  MONGODB: Array<MongoServer>
-  
+
+
 }
 

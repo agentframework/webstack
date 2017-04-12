@@ -1,8 +1,9 @@
-import { router, route } from '../core/ExpressDecorators';
-import { Request, Response, Next, IMiddlewareSupport } from '../router';
-import { ServerRouter } from '../router';
-import { ExpressRouter } from '../core/ExpressRouter';
-import { CreateIdString } from '../data/MongoUtils';
+import { Request, Response, Next } from '../router';
+import { v4 } from 'uuid';
+import { ExpressRouter, route, router } from 'agentstack-express';
+import { Server } from '../server';
+import { IServerSettings } from '../../conf/settings';
+import { ILogger } from 'agentstack';
 
 const responseTime = require('response-time');
 const helmet = require('helmet');
@@ -10,43 +11,44 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 @router('/api')
-export class GlobalMiddleware extends ServerRouter implements IMiddlewareSupport {
+export class GlobalMiddleware {
   
-  onInit({ router }): void {
-    
-    // Workaround: Current version of TypeScript(2.1.4) can not mix destructuring and type annotation
-    const _router: ExpressRouter = router;
+  settings: IServerSettings;
+  logger: ILogger;
+  
+  constructor(server: Server, router: ExpressRouter) {
+  
+    this.logger = server.logger;
+    this.settings = server.settings;
     
     // response time is only for api
-    _router.use(responseTime());
+    router.use(responseTime());
     
     // Use helmet to secure api headers
-    _router.use(helmet());
+    router.use(helmet());
     
     // Request body parsing middleware should be above methodOverride
-    _router.use(bodyParser.urlencoded({
+    router.use(bodyParser.urlencoded({
       extended: true
     }));
     
     // Use json for data transportation
-    _router.use(bodyParser.json());
+    router.use(bodyParser.json());
     
     // Add the cookie parser and flash middleware
-    _router.use(cookieParser());
+    router.use(cookieParser());
     
   }
   
   @route('*')
   middleware(req: Request, res: Response, next: Next): void {
     
-    console.log(`[${req.fingerprint().ip}] ${req.method} /api${req.path}`);
-    
-    const auth = req.getAuthToken();
-    const device_id = auth.id || CreateIdString();
     const port = req.socket['_peername']['port'];
-    const req_id = `REQ/${device_id.slice(18)}/${port}/${Date.now().toString(16)}`.toUpperCase();
+    const req_id = `REQ/${v4().toUpperCase()}/${port}/${Date.now().toString(16)}`.toUpperCase();
     const req_addr = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     
+    console.log(`[${req_addr}] ${req.method} /api${req.path}`);
+  
     // apply global settings
     req.id = req_id;
     req.res = res;
@@ -57,17 +59,6 @@ export class GlobalMiddleware extends ServerRouter implements IMiddlewareSupport
     
     // send request id to client
     res.setHeader('X-Request-Id', req.id);
-    
-    if (!auth.id) {
-      // device id not exists
-      // create new device id and set browser cookie
-      
-      // TODO: remember this device id and it's fingerprint
-      res.sendAuthToken({ id: device_id });
-      
-      // TODO: matrices NEW DEVICE +1
-      req.logger.debug(req.fingerprint(), `...${device_id}: New device id issued`);
-    }
     
     next();
   }
