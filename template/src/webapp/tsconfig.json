@@ -4,9 +4,10 @@
     "lib": [
       "dom",
       "es5",
-      "es2015.Promise",
-      "es2016"
+      "es2015.promise"
     ],
+    "module": "es2015",
+    "moduleResolution": "node",
     "declaration": false,
     "removeComments": true,
     "experimentalDecorators": true,
@@ -14,19 +15,20 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": false,
     "typeRoots": [
-      "node_modules/@types/"
+      "../../node_modules/@types/"
     ],
     "types": [
-      "jasmine",
       "node"
     ]
   },
   "include": [
-    "src/shared/*.ts",
-    "src/webapp/*.ts"
+    "*.ts",
+    "**/*.ts",
+    "../shared/**/*.ts",
+    "../../node_modules/@types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "../shared/**/*.d.ts"
   ]
 }

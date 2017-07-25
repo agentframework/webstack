@@ -55,7 +55,7 @@ export default [
             loaders: {
               js: [
                 'babel-loader?presets[]=babili',
-                'vue-ts-loader?configFileName=tsconfig.webapp.json'
+                'vue-ts-loader?configFileName=./src/webapp/tsconfig.json'
               ],
               ...configCssLoaders({ sourceMap: false, extract: true, minimize: true })
             }
@@ -65,7 +65,7 @@ export default [
           test: /\.ts$/,
           use: [
             'babel-loader?presets[]=babili',
-            'vue-ts-loader?configFileName=tsconfig.webapp.json'
+            'vue-ts-loader?configFileName=./src/webapp/tsconfig.json'
           ],
           exclude: /node_modules/
         },

@@ -1,18 +1,12 @@
 import { Request, Response } from '../router';
 import { VersionResult } from '../../shared/version';
-import { route, router } from 'agentstack-express';
+import { BaseRouter, route, router } from 'agentstack-router';
 import { IServerSettings } from '../../conf/settings';
-import { Server } from '../server';
+import { ExpressEngine } from 'agentstack-express';
 
 
 @router('/api')
-export class RootRouter {
-  
-  settings: IServerSettings;
-  
-  constructor(server: Server) {
-    this.settings = server.settings;
-  }
+export class RootRouter extends BaseRouter<ExpressEngine<IServerSettings>, IServerSettings> {
   
   @route('GET', '/version')
   async version(req: Request, res: Response) {

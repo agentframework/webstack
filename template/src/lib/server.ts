@@ -4,14 +4,20 @@ import { ExpressEngine } from 'agentstack-express';
 import { GlobalExceptionMiddleware } from './middlewares/exception.middleware';
 import { GlobalMiddleware } from './middlewares/global.middleware';
 import { RootRouter } from './routers/root.router';
+import { DatabaseManager } from './database';
+import { TaskRouter } from './routers/task.router';
 
 
 export class Server extends ExpressEngine<IServerSettings> {
   
   onInit() {
+    this.addAgent(DatabaseManager);
+    
     this.addRouter(GlobalMiddleware);
     this.addRouter(RootRouter);
+    this.addRouter(TaskRouter);
     this.addRouter(GlobalExceptionMiddleware);
+    
   }
   
 }

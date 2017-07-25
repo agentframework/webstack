@@ -1,3 +1,5 @@
 HOST: 0.0.0.0
 PORT: 8080
 LOG_DIR: logs
+MONGODB:
+  - { name: develop, host: localhost, port: 27017 }

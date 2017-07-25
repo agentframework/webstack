@@ -26,6 +26,9 @@
   "dependencies": {
     "agentframework": "~0",
     "agentstack": "~0",
+    "agentstack-mongodb": "~0",
+    "agentstack-express": "~0",
+    "agentstack-router": "~0",
     "axios": "~0",
     "body-parser": "~1",
     "compression": "~1",
