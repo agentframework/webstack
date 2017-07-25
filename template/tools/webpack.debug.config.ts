@@ -1,5 +1,5 @@
 import * as webpack from 'webpack'
-import * as HtmlWebpackPlugin  from 'html-webpack-plugin'
+import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 import { configStyleLoaders, configCssLoaders, resolve } from './webpack.utils'
 
 export default [
@@ -12,20 +12,15 @@ export default [
       publicPath: '/',
       libraryTarget: 'umd',
       filename: 'assets/js/[name].[hash].js',
-      chunkFilename: 'assets/js/[id].[hash].js'
+      chunkFilename: 'assets/js/[device].[hash].js'
     },
     resolve: {
       extensions: ['.ts', '.vue', '.js'],
       alias: {
-{{#if_eq build "runtime"}}
-        'vue$': 'vue/dist/vue.runtime.js',
-{{/if_eq}}
-{{#if_eq build "standalone"}}
-        'vue$': 'vue/dist/vue.js',
-{{/if_eq}}
-        'vuex$': 'vuex/dist/vuex.js',
-        'vue-router$': 'vue-router/dist/vue-router.js',
-        'axios$': 'axios/dist/axios.js'
+        'vue': 'vue/dist/vue.js',
+        'vuex': 'vuex/dist/vuex.js',
+        'vue-router': 'vue-router/dist/vue-router.js',
+        'axios': 'axios/dist/axios.js'
       }
     },
     externals: {
@@ -35,6 +30,9 @@ export default [
       // },
       // vuex: {
       //   root: 'Vuex', commonjs: 'vuex', commonjs2: 'vuex', amd: 'vuex'
+      // },
+      // 'element-ui': {
+      //   root: 'ELEMENT', commonjs: 'element-ui', commonjs2: 'element-ui', amd: 'element-ui'
       // },
       // 'vue-router': {
       //   root: 'VueRouter', commonjs: 'vue-router', commonjs2: 'vue-router', amd: 'vue-router'
@@ -50,11 +48,14 @@ export default [
           loader: 'vue-loader',
           options: {
             loaders: {
-              js: [
+              ts: [
                 'babel-loader?presets[]=babili',
-                'vue-ts-loader?configFileName=./src/webapp/tsconfig.json'
+                'vue-ts-loader?transpileOnly=true&configFileName=./src/webapp/tsconfig.json'
               ],
-              ...configCssLoaders({ sourceMap: false, extract: false, minimize: false })
+              ...configCssLoaders({
+                sourceMap: false,
+                extract: false,
+                minimize: false })
             }
           }
         },
@@ -62,7 +63,7 @@ export default [
           test: /\.ts$/,
           use: [
             'babel-loader?presets[]=babili',
-            'vue-ts-loader?configFileName=./src/webapp/tsconfig.json'
+            'vue-ts-loader?transpileOnly=true&configFileName=./src/webapp/tsconfig.json'
           ],
           exclude: /node_modules/
         },
@@ -90,10 +91,10 @@ export default [
         }
       }),
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoEmitOnErrorsPlugin(),
+      // new webpack.NoEmitOnErrorsPlugin(),
       // https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
-        title: '{{ name }} [dev]',
+        title: 'server [dev]',
         filename: 'index.html',
         template: 'index.html',
         inject: true
@@ -109,9 +110,8 @@ export default [
       // extract webpack runtime and module manifest to its own file in order to
       // prevent vendor hash from being updated whenever app bundle is updated
       new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest',
-        chunks: ['vendor']
-      }),
+        name: 'manifest'
+      })
     ]
   }
 ];

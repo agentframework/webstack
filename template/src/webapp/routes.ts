@@ -1,10 +1,9 @@
 import * as Vue from 'vue'
 import * as VueRouter from 'vue-router';
+import Welcome from './components/welcome.vue';
+import About from './components/about.vue';
 
 Vue.use(VueRouter);
-
-const Welcome = require('./components/welcome');
-const About = require('./components/about');
 
 const routes = [
   { path: '/welcome', component: Welcome },

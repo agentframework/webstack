@@ -1,5 +1,5 @@
 {
-  "exec": "npm run standalone",
+  "exec": "node_modules/.bin/ts-node --debug src/bin/standalone.ts",
   "ext": "ts json yaml",
   "env": {
     "NODE_ENV": "development"
@@ -13,7 +13,6 @@
     "src/conf",
     "src/lib",
     "src/shared",
-    "test",
     "tools"
   ]
 }

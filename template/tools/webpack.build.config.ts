@@ -1,8 +1,8 @@
 import * as webpack from 'webpack'
-import * as HtmlWebpackPlugin  from 'html-webpack-plugin'
+import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as OptimizeCSSPlugin from 'optimize-css-assets-webpack-plugin'
-import { BundleAnalyzerPlugin }  from 'webpack-bundle-analyzer'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import { configCssLoaders, getExternalModules, resolve } from './webpack.utils'
 
 export default [
@@ -15,17 +15,12 @@ export default [
       publicPath: '/',
       libraryTarget: 'umd',
       filename: 'assets/js/[name].[chunkhash].js',
-      chunkFilename: 'assets/js/[id].[chunkhash].js'
+      chunkFilename: 'assets/js/[device].[chunkhash].js'
     },
     resolve: {
       extensions: ['.ts', '.vue', '.js'],
       alias: {
-{{#if_eq build "runtime"}}
-        'vue$': 'vue/dist/vue.runtime.min.js',
-{{/if_eq}}
-{{#if_eq build "standalone"}}
         'vue$': 'vue/dist/vue.min.js',
-{{/if_eq}}
         'vuex$': 'vuex/dist/vuex.min.js',
         'vue-router$': 'vue-router/dist/vue-router.min.js',
         'axios$': 'axios/dist/axios.min.js'
@@ -38,6 +33,9 @@ export default [
       // },
       // vuex: {
       //   root: 'Vuex', commonjs: 'vuex', commonjs2: 'vuex', amd: 'vuex'
+      // },
+      // 'element-ui': {
+      //   root: 'ELEMENT', commonjs: 'element-ui', commonjs2: 'element-ui', amd: 'element-ui'
       // },
       // 'vue-router': {
       //   root: 'VueRouter', commonjs: 'vue-router', commonjs2: 'vue-router', amd: 'vue-router'
@@ -53,7 +51,7 @@ export default [
           loader: 'vue-loader',
           options: {
             loaders: {
-              js: [
+              ts: [
                 'babel-loader?presets[]=babili',
                 'vue-ts-loader?configFileName=./src/webapp/tsconfig.json'
               ],
@@ -82,7 +80,7 @@ export default [
           options: {
             name: 'assets/fonts/[name].[hash:7].[ext]'
           }
-        },
+        }
         // all css was extracted to standalone css file. no need css loader on the fly
         //...styleLoaders({ sourceMap: false, extract: false, minimize: false })
       ]
@@ -108,7 +106,7 @@ export default [
       // you can customize output by editing /index.html
       // see https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
-        title: '{{ name }}',
+        title: 'server',
         filename: 'index.html',
         template: 'index.html',
         inject: true,

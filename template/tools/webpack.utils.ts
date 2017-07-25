@@ -1,4 +1,4 @@
-import * as ExtractTextPlugin  from 'extract-text-webpack-plugin'
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as util from 'util';
 import * as path from 'path'
 import * as fs from 'fs'
@@ -9,13 +9,13 @@ const projectRoot = path.resolve(__dirname, '..');
 export function getExternalModules() {
   let externalNodeModules = Object.create(null);
 
-// all node_modules will be consider as externals
+  // all node_modules will be consider as externals
   fs.readdirSync(path.join(projectRoot, 'node_modules'))
     .filter((x: string) => ['.bin'].indexOf(x) === -1)
     .forEach((mod: string) => {
       externalNodeModules[mod] = `commonjs ${mod}`
     });
-  
+
   return externalNodeModules;
 }
 
@@ -25,7 +25,7 @@ export function resolve(dir) {
 
 export function configCssLoaders(options) {
   options = options || {};
-  
+
   const cssLoader = {
     loader: 'css-loader',
     options: {
@@ -33,7 +33,7 @@ export function configCssLoaders(options) {
       sourceMap: options.sourceMap || false
     }
   };
-  
+
   // generate loader string to be used with extract text plugin
   function generateLoaders(loader?: string, loaderOptions?) {
     const loaders: Array<any> = [cssLoader];
@@ -45,7 +45,7 @@ export function configCssLoaders(options) {
         })
       })
     }
-    
+
     // Extract CSS when that option is specified
     // (which is the case during production build)
     if (options.extract) {
@@ -58,7 +58,7 @@ export function configCssLoaders(options) {
       return ['vue-style-loader', ...loaders]
     }
   }
-  
+
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
   const cssLoaders = {
     css: generateLoaders(),

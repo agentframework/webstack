@@ -39,7 +39,7 @@ if (server.settings.ENV === 'development' || server.settings.ENV === 'testing') 
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
-  const config = require('../../tools/webpack.run.config').default;
+  const config = require('../../tools/webpack.debug.config').default;
   const compiler = webpack(config);
   
   const devMiddleware = webpackDevMiddleware(compiler, {

@@ -10,16 +10,9 @@
 </template>
 
 
-<script>
-
-  import { IState } from '../store'
-  import { mapState } from 'vuex'
+<script lang="ts">
 
   export default {
-
-    computed: mapState({
-      version: (state: IState) => state.version
-    }),
 
     mounted() {
       this.$store.dispatch('refresh');

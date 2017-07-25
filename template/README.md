@@ -17,9 +17,6 @@
 # install dependencies
 npm install
 
-# auto-run unit tests after save
-npm start
-
 # serve with hot reload at localhost:8080
 npm run serv
 
@@ -29,13 +26,8 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 
-# test for everything: specs, lint, build and coverage
-npm run test
-
-# run tests and generate coverage report
-npm run cov
 ```
 
 ## Known Issue
 
-> The latest version of `css-loader` will introduce Buffer into browser which is not necessary. So this project is using a customized `css-loader` to reduce the production dist size by ~40kb (min+gzipped)
+> The latest version of `css-loader` will introduce Buffer into browser which is not necessary. So this project is using a customized `css-loader` to reduce the production dist size by ~40kb (after min+gzipped)

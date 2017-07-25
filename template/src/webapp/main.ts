@@ -1,8 +1,7 @@
 import * as Vue from 'vue'
 import store from './store';
 import router from './routes';
-
-const App = require('./layouts/app');
+import App from './layouts/app.vue';
 
 export let app = new Vue({
   el: '#app',
